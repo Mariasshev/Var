@@ -52,6 +52,21 @@ void Var::Show()
 	}
 }
 
+void Var::SetStr(string str)
+{
+	typeStr = str;
+}
+
+string Var::GetStr()
+{
+	return typeStr;
+}
+
+int Var::GetSize()
+{
+	return typeStr.length();
+}
+
 int Var::toInt()const
 {
 	switch (check) {
@@ -92,10 +107,30 @@ string Var::toString()const
 		return to_string(typeDouble);
 		break;
 	case 2:
-		return typeStr;
+		return string(typeStr);
 		break;
 	}
+	return string(toChar());
 }
+
+
+char* Var::toChar() const
+{
+	char* tmpStr = new char[30];
+	switch (check)
+	{
+	case 0:
+		return itoa(typeInt, tmpStr, 10);
+	case 1:
+		sprintf(tmpStr, "%lf", typeDouble);
+		return tmpStr;
+	case 2:
+		strcpy(tmpStr, (typeStr).c_str());
+		return tmpStr;
+	}
+	return NULL;
+}
+
 
 Var::Var(const int& number)
 {
@@ -340,6 +375,8 @@ Var& Var::operator/=(const Var& obj)
 	return *this;
 }
 
+
+
 bool Var::operator>(const Var& obj)
 {
 	switch (check) {
@@ -437,11 +474,3 @@ bool Var::operator!=(const Var& obj)
 	return false;
 }
 
-const string operator+(const string& leftStr, const string& rightStr)
-{
-	string rez;
-	for (int i = 0; i < strlen(leftStr.typeStr); i++) {
-
-	}
-	return string();
-}

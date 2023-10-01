@@ -17,10 +17,15 @@ public:
 	Var(char* ch);
 
 	void Show();
+	void SetStr(string str);
+	string GetStr();
+	int GetSize();
+
 
 	//converting
 	int toInt()const;
 	double toDouble()const;
+	char* toChar() const;
 	string toString()const;
 
 	//copy constructor
@@ -45,8 +50,6 @@ public:
 	Var& operator*=(const Var& obj);		//*=
 	Var& operator/=(const Var& obj);		// /=
 
-	string operator *=(const string& obj);
-	string operator /=(const string& obj);
 
 	bool operator>(const Var& obj);			//>
 	bool operator<(const Var& obj);			//<
@@ -56,7 +59,9 @@ public:
 	bool operator !=(const Var& obj);		//!=
 };
 
-//
-const string operator + (const string& leftStr, const string& rightStr);
-const string operator * (const string& leftStr, const string& rightStr);
-const string operator / (const string& leftStr, const string& rightStr);
+
+Var operator+(const Var& obj1, const Var& obj2);
+Var operator*(const Var& obj1, const Var& obj2);
+Var operator/(const Var& obj1, const Var& obj2);
+Var operator*=(const Var& obj1, const Var& obj2);
+Var operator/=(const Var& obj1, const Var& obj2);
