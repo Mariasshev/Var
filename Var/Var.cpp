@@ -247,7 +247,131 @@ Var& Var::operator=(const string& str)
 	return *this;
 }
 
-const Var Var::operator+(const Var& obj)
+void Var::operator+(const Var obj)
+{
+	if (check == obj.check) {
+		switch (check) {
+		case 0:
+			typeInt = typeInt + obj.typeInt;
+			break;
+		case 1:
+			typeDouble = typeDouble + obj.typeDouble;
+			break;
+		case 2:
+			typeStr = typeStr + obj.typeStr;
+			break;
+		}
+	}
+
+	//int +
+	if (check == 0) {
+		switch (obj.check) {
+		case 0:
+			typeInt = typeInt + obj.typeInt;
+			break;
+		case 1:
+			typeInt = typeInt + obj.typeDouble;
+			break;
+		case 2:
+			typeInt = typeInt + stoi(obj.typeStr);
+			break;
+		}
+	}
+
+	//double +
+	if (check == 1) {
+		switch (obj.check) {
+		case 0:
+			typeDouble = typeDouble + obj.typeInt;
+			break;
+		case 1:
+			typeDouble = typeDouble + obj.typeDouble;
+			break;
+		case 2:
+			typeDouble = typeDouble + stod(obj.typeStr);
+			break;
+		}
+	}
+
+	//str +
+	if (check == 2) {
+		switch (obj.check) {
+		case 0:
+			typeStr = typeStr + to_string(obj.typeInt);
+			break;
+		case 1:
+			typeStr = typeStr + to_string(obj.typeDouble);
+			break;
+		}
+	}
+
+}
+
+void Var::operator-(const Var obj)
+{
+	if (check == obj.check) {
+		switch (check) {
+		case 0:
+			typeInt = typeInt - obj.typeInt;
+			break;
+		case 1:
+			typeDouble = typeDouble - obj.typeDouble;
+			break;
+		case 2:
+			typeStr = " ";
+			break;
+		}
+	}
+
+	//int -
+	if (check == 0) {
+		switch (obj.check) {
+		case 0:
+			typeInt = typeInt - obj.typeInt;
+			break;
+		case 1:
+			typeInt = typeInt - obj.typeDouble;
+			break;
+		case 2:
+			typeInt = typeInt - stoi(obj.typeStr);
+			break;
+		}
+	}
+
+	//double -
+	if (check == 1) {
+		switch (obj.check) {
+		case 0:
+			typeDouble = typeDouble - obj.typeInt;
+			break;
+		case 1:
+			typeDouble = typeDouble - obj.typeDouble;
+			break;
+		case 2:
+			typeDouble = typeDouble - stod(obj.typeStr);
+			break;
+		}
+	}
+
+	//str -
+	if (check == 2) {
+		switch (obj.check) {
+		case 0:
+			typeStr = stoi(typeStr) - obj.typeInt;
+			break;
+		case 1:
+			typeStr = stod(typeStr) - obj.typeDouble;
+			break;
+		}
+	}
+}
+
+void Var::operator*(const Var obj)
+{
+	return Var();
+}
+
+ Var Var::operator+(const Var& obj)
 {
 	switch (check) {
 	case 0:
@@ -263,7 +387,7 @@ const Var Var::operator+(const Var& obj)
 	return *this;
 }
 
-const Var& Var::operator-(const Var& obj)
+ Var& Var::operator-(const Var& obj)
 {
 	switch (check) {
 	case 0:
@@ -279,7 +403,7 @@ const Var& Var::operator-(const Var& obj)
 	return *this;
 }
 
-const Var& Var::operator*(const Var& obj)
+ Var& Var::operator*(const Var obj)
 {
 	switch (check) {
 	case 0:
@@ -295,22 +419,17 @@ const Var& Var::operator*(const Var& obj)
 	return *this;
 }
 
-const Var& Var::operator/(const Var& obj)
+ Var& Var::operator/(const Var obj)
 {
 	switch (check) {
 	case 0:
-		typeInt /= obj.toInt();
+		typeInt = typeInt / obj.toInt();
 		return *this;
 		break;
 	case 1:
-		typeDouble /= obj.toDouble();
+		typeDouble = typeDouble / obj.toDouble();
 		return *this;
 		break;
-	case 2:
-		typeStr /= obj.toString();
-		return *this;
-		break;
-	}
 	return *this;
 }
 

@@ -37,16 +37,16 @@ public:
 	Var(const string& str);
 
 	//=
-	Var& operator = (const Var& obj);
-	Var& operator = (const int& number);
-	Var& operator = (const double& number);
-	Var& operator = (const string& str);
+	Var& operator = (const Var obj);
+	Var& operator = (const int number);
+	Var& operator = (const double number);
+	Var& operator = (const string str);
 
 	//operators
-	const Var operator+(const Var& obj);		//+
-	const Var& operator-(const Var& obj);		//-
-	const Var& operator*(const Var& obj);		//*
-	const Var& operator/(const Var& obj);		//   /
+	void operator+(const Var obj);		//+
+	void operator-(const Var obj);		//-
+	void operator*(const Var obj);		//*
+	void operator/(const Var obj);		//   /
 
 	Var& operator+=(const Var& obj);		//+=
 	Var& operator-=(const Var& obj);		//-=
