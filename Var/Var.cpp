@@ -57,14 +57,29 @@ void Var::SetStr(string str)
 	typeStr = str;
 }
 
-string Var::GetStr()
+string Var::GetStr()const
 {
 	return typeStr;
 }
 
-int Var::GetSize()
+int Var::GetSize()const
 {
 	return typeStr.length();
+}
+
+int Var::GetCheck()const
+{
+	return check;
+}
+
+int Var::GetInt() const
+{
+	return typeInt;
+}
+
+double Var::GetDouble() const
+{
+	return typeDouble;
 }
 
 int Var::toInt()const
@@ -474,3 +489,62 @@ bool Var::operator!=(const Var& obj)
 	return false;
 }
 
+Var operator+(const Var obj1, const Var obj2)
+{
+	if (obj1.GetCheck() == obj2.GetCheck()) {
+		switch (obj1.GetCheck()) {
+		case 0:
+			return obj1.GetInt() + obj2.GetInt();
+			break;
+		case 1:
+			return obj1.GetDouble() + obj2.GetDouble();
+			break;
+		case 2:
+			return obj1.GetStr() + obj2.GetStr();
+			break;
+		}
+	}
+
+	if (obj1.GetCheck() == 0) {				//int + 
+		switch (obj2.GetCheck()) {
+		case 0:
+			return obj1.GetInt() + obj2.GetInt();
+			break;
+		case 1:
+			return obj1.GetInt() + obj2.GetDouble();
+			break;
+		case 2:
+			return obj1.GetInt() + stoi(obj2.GetStr());
+			break;
+		}
+	}
+
+	if (obj1.GetCheck() == 1) {				//double + 
+		switch (obj2.GetCheck()) {
+		case 0:
+			return obj1.GetDouble() + obj2.GetInt();
+			break;
+		case 1:
+			return obj1.GetDouble() + obj2.GetDouble();
+			break;
+		case 2:
+			return obj1.GetDouble() + stod(obj2.GetStr());
+			break;
+		}
+	}
+
+	if (obj1.GetCheck() == 2) {				//str + 
+		switch (obj2.GetCheck()) {
+		case 0:
+			return obj1.GetStr() + to_string(obj2.GetInt());
+			break;
+		case 1:
+			return obj1.GetStr() + to_string(obj2.GetDouble());
+			break;
+		case 2:
+			return obj1.GetStr() + obj2.GetStr();
+			break;
+		}
+	}
+	
+}

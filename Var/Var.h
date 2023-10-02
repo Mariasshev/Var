@@ -18,8 +18,11 @@ public:
 
 	void Show();
 	void SetStr(string str);
-	string GetStr();
-	int GetSize();
+	string GetStr()const;
+	int GetSize()const;
+	int GetCheck()const;
+	int GetInt()const;
+	double GetDouble()const;
 
 
 	//converting
@@ -60,8 +63,8 @@ public:
 };
 
 
-Var operator+(const Var& obj1, const Var& obj2);
-Var operator*(const Var& obj1, const Var& obj2);
-Var operator/(const Var& obj1, const Var& obj2);
-Var operator*=(const Var& obj1, const Var& obj2);
-Var operator/=(const Var& obj1, const Var& obj2);
+Var operator+(const Var obj1, const Var obj2);
+Var operator*(const Var obj1, const Var obj2);
+Var operator/(const Var obj1, const Var obj2);
+Var operator*=(const Var obj1, const Var obj2);
+Var operator/=(const Var obj1, const Var obj2);
